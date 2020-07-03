@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,700;0,800;1,600&family=Raleway:ital,wght@0,300;0,400;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="assets/css/styles.css"/>
+
+    <script src="https://kit.fontawesome.com/3b94be4535.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/moment"></script>
+
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <header>  </header>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <h1>Weather Forecast for...</h1>
+            <form>
+              <input class="search" type="search" placeholder="Search for a city" id="locationInput">
+              <button class="fas fa-search" type="submit" id="searchLocation"></button>
+          </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+              <div class="" id="history">
+                  <!-- buttons go here -->
+              </div>
+          </div>
+      </div>
+
+        <div class="row city-info">
+          <div class="col-12" id="currentWeather">
+            <h1 class="text-center" id="location">City </h1>
+
+              <div class="row">
+                  <div class="col-3">Temperature: <span id="temperature"></span></div>
+                  <div class="col-3">Humidity: <span id="humidity"></span></div>
+                  <div class="col-3">Wind Speed: <span id="windSpeed"></span></div>
+                  <div class="col-3">UV Index: <span class="p-1 rounded text-white" id="uv"></span></div>
+              </div>
+
+              <div class="row">
+                  <div class="col-12"><h2>5-Day forecast</h2></div>
+              </div>
+      
+          </div>
+        </div>
+
+        <div class="row justify-content-center day-boxes">
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="0">
+            <h2 class="text-center">Day 1</h2>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="1">
+            <h2 class="text-center">Day 2</h2>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="2">
+            <h2 class="text-center">Day 3</h2>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="3">
+            <h2 class="text-center">Day 4</h2>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="4">
+            <h2 class="text-center">Day 5</h2>
+          </div>
+        </div>
+
+
+        </div>
+              
+             
+      </div>
+      
+
+
+
+      <script src="assets/js/script.js"></script>
+
+</body>
+</html>
