@@ -26,7 +26,6 @@ function getIcon(condition) {
 }
 
 
-
 function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, condition) {    
     
     $("#location").empty();
@@ -88,7 +87,6 @@ $("#searchLocation").on("click", function () {
     $("#currentWeather").css("display", "block");
     $("#forecast").css("display", "flex");
 
-
 });
 
 $(document).on("click", ".city-button", function () {
@@ -100,9 +98,13 @@ $(document).on("click", ".city-button", function () {
 });
 
 function formatDate(forecastDates) {
-    var forecastDates = moment().format("MMMM" + " D" + "," + " YYYY");
+    var forecastDates = moment().format(("MMMM" + " D" + "," + " YYYY", "MMMM" + " D" + "," + " YYYY"));
     return forecastDates;
 }
+
+
+
+
 
 function queryForecast(location) {
 
@@ -159,8 +161,8 @@ function query(location) {
         $.ajax({
             url: queryURL,
             method: "GET"
-        }).then(function (uvresponse) {
-            renderCurrentWeather(response.name, response.main.temp, response.main.humidity, response.wind.speed, uvresponse.value, response.weather[0].main);
+        }).then(function (uvIndex) {
+            renderCurrentWeather(response.name, response.main.temp, response.main.humidity, response.wind.speed, uvIndex.value, response.weather[0].main);
         });
 
 
@@ -181,23 +183,22 @@ function addBoxes(index, date, temperature, humidity, condition) {
     date = formatDate(date);
     title.text(date);
 
-    var t = $("<p>");
-    t.addClass("card-text");
-    t.text("Temp: ");
-    t.append(temperature);
-    t.append(" °F");
+    var boxTemperature = $("<p>");
+    boxTemperature.addClass("card-text");
+    boxTemperature.text("Temperature");
+    boxTemperature.prepend("<span>" + "°F" + "<br>");
+    boxTemperature.prepend("<span> " + temperature);
 
-
-    var h = $("<p>");
-    h.addClass("card-text");
-    h.text("Humidity: ");
-    h.append(humidity);
-    h.append("%");
-
+    var boxHumidity = $("<p>");
+    boxHumidity.addClass("card-text");
+    boxHumidity.text("Humidity");
+    boxHumidity.prepend("<span>" + "%" + "<br>");
+    boxHumidity.prepend("<span> " + humidity);
+    
     dayBox.append(icon);
     dayBox.append(title);
-    dayBox.append(t);
-    dayBox.append(h);
+    dayBox.append(boxTemperature);
+    dayBox.append(boxHumidity);
 
     $("#" + index).empty();
     $("#" + index).append(dayBox);

@@ -73,10 +73,6 @@ input {
     padding: 10px;
     padding-top: 30px;
 }
-   .weather-icon img{
-    width: 70px;
-    padding: 5px;
-}
 
 .city-info h1 {
     font-family: 'Open Sans', sans-serif;
@@ -120,8 +116,9 @@ input {
 }
 
 
+
 .day-boxes {
-    margin-top: -65px;
+    margin-top: -55px;
 }
 
 .day-box {
@@ -133,8 +130,30 @@ input {
     width: 100%;
     border-radius: 5px;
     padding: 10px;
+    position: relative;
 }
 
+.weather-icon img{
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+    padding: 10px;
+    background: white;
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    border-radius: 50px;
+    border: solid #2155cf 3px;
+    z-index: 9999;
+}
 
+.card-text {
+    font-size: 14px;
+}
+
+.card-text span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+}
 
 
