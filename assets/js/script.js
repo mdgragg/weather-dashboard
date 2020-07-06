@@ -1,8 +1,5 @@
 var locations = [];
 
-var sun = document.createElement("img");
-sun.src = "assets/images/sun.png";
-
 function getIcon(condition) {
     console.log(condition);
     if (condition === "Rain")
@@ -30,14 +27,14 @@ function getIcon(condition) {
 
 
 
-
 function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, condition) {    
     
     $("#location").empty();
     $("#location").append(location);
     $("#location").append(" ");
+
     var date = moment().format("MMMM" + " D" + "," + " YYYY");
-    
+    $("#date-main").empty();
     $("#date-main").append(date);
     $("#date-main").append(" ");
 
@@ -102,10 +99,9 @@ $(document).on("click", ".city-button", function () {
     $("#forecast").css("display", "flex");
 });
 
-function formatDate(date) {
-    var fDate = date.split(" ")[0].split("-");
-    fDate = fDate[1] + "/" + fDate[2] + "/" + fDate[0];
-    return fDate;
+function formatDate(forecastDates) {
+    var forecastDates = moment().format("MMMM" + " D" + "," + " YYYY");
+    return forecastDates;
 }
 
 function queryForecast(location) {
