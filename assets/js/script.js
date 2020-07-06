@@ -1,5 +1,6 @@
 var locations = [];
 
+// which image to use depending on weather condition
 function getIcon(condition) {
     console.log(condition);
     if (condition === "Rain")
@@ -71,8 +72,11 @@ function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, co
 
     $("#uv").append(uv);
     $("#uv").addClass("weather-value");
-
 }
+
+
+
+
 
 $("#searchLocation").on("click", function () {
     event.preventDefault();
@@ -97,57 +101,21 @@ $(document).on("click", ".city-button", function () {
     $("#forecast").css("display", "flex");
 });
 
+
+
+
+
+
+
 function formatDate(forecastDates) {
-    
+    var forecastDates = moment().format("MMMM" + " D" + "," + " YYYY");
     return forecastDates;
 }
 
 
 
 
-// 
-function queryForecast(location) {
-    var APIKey = "ef44665854f55183eee5b200931c4f01";
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=" + APIKey;
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(queryURL);
-        console.log(response);
-        var forecast = response.list;
-        for (var i = 0; i < forecast.length; i++) {
-            var cardNumber = 0;
-            if (i === 0)
-                cardNumber = 0;
-                date = moment().format("MMMM" + " D" + "," + " YYYY");
-            if (i === 6)
-                cardNumber = 1;
-                date = moment().format("MMMM" + " D" + "," + " YYYY");
-            if (i === 14)
-                cardNumber = 2;
-                date = moment().format("MMMM" + " D" + "," + " YYYY");
-            if (i === 22)
-                cardNumber = 3;
-                date = moment().format("MMMM" + " D" + "," + " YYYY");
-            if (i === 30)
-                cardNumber = 4;
-                date = moment().format("MMMM" + " D" + "," + " YYYY");
-
-            if (i === 0 || i === 6 || i === 14 || i === 22 || i === 30) {
-                var date = forecast[i].dt_txt;
-                var temperature = forecast[i].main.temp;
-                var humidity = forecast[i].main.humidity;
-                var condition = forecast[i].weather[0].main;
-                addBoxes(cardNumber, date, temperature, humidity, condition);
-            }
-        }
-    });
-}
-
-
-// Main 
+// Pulling Main weather info
 function query(location) {
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=" + APIKey;
@@ -177,7 +145,47 @@ function query(location) {
 }
 
 
-// Adding 5-day forcast
+
+// pulling 5 day forcast weather info
+function queryForecast(location) {
+    var APIKey = "ef44665854f55183eee5b200931c4f01";
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=" + APIKey;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(queryURL);
+        console.log(response);
+        var forecast = response.list;
+        for (var i = 0; i < forecast.length; i++) {
+            var cardNumber = 0;
+            if (i === 0)
+                cardNumber = 0;
+            if (i === 6)
+                cardNumber = 1;
+            if (i === 14)
+                cardNumber = 2;
+            if (i === 22)
+                cardNumber = 3;
+            if (i === 30)
+                cardNumber = 4;
+
+            if (i === 0 || i === 6 || i === 14 || i === 22 || i === 30) {
+                forecastDates = ("MMMM" + " D" + "," + " YYYY");
+                var temperature = forecast[i].main.temp;
+                var humidity = forecast[i].main.humidity;
+                var condition = forecast[i].weather[0].main;
+                
+                addBoxes(cardNumber, forecastDates, temperature, humidity, condition);
+            }
+        }
+    });
+}
+
+
+
+// Adding 5-day forcast items
 function addBoxes(index, date, temperature, humidity, condition) {
 
     var dayBox = $("<div>");
@@ -211,6 +219,8 @@ function addBoxes(index, date, temperature, humidity, condition) {
     $("#" + index).empty();
     $("#" + index).append(dayBox);
 }
+
+
 
 
 
