@@ -30,6 +30,7 @@ input {
     font-size: 28px;
     margin-top: 15px;
     padding: 10px;
+    border-radius: 0px;
     vertical-align: bottom;
 }
 
@@ -89,7 +90,7 @@ input {
     font-size: 28px;
     text-align: center;
     margin-top: -40px;
-    margin-left: 30px;
+    margin-left: 70px;
 }
 
 .weather-info {

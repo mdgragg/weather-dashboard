@@ -27,8 +27,62 @@ function getIcon(condition) {
 }
 
 
+// Event handlers
+$("#searchLocation").on("click", function (event) {
+    event.preventDefault();
+    var location = $("#locationInput").val().trim();
+    $("#locationInput").val("");    
+
+    query(location);
+    queryForecast(location)
+    addButton(location);
+
+    $("#currentWeather").css("display", "block");
+    $("#forecast").css("display", "flex");
+
+});
+
+$(document).on("click", ".city-button", function () {
+    var location = $(this).attr("data-city");
+    query(location);
+    queryForecast(location);
+    $("#currentWeather").css("display", "block");
+    $("#forecast").css("display", "flex");
+});
+
+
+
+// Pulling Main weather info
+function query(location) {
+    var APIKey = "ef44665854f55183eee5b200931c4f01";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=" + APIKey;
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        console.log(queryURL);
+        console.log(response);
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+
+        APIKey = "ef44665854f55183eee5b200931c4f01";
+        queryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon;
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (uvIndex) {
+            renderCurrentWeather(response.name, response.main.temp, response.main.humidity, response.wind.speed, uvIndex.value, response.weather[0].main);
+        });
+
+
+    });
+
+}
+
+// Creating Main weather info items
 function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, condition) {    
-    
     $("#location").empty();
     $("#location").append(location);
     $("#location").append(" ");
@@ -78,64 +132,7 @@ function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, co
 
 
 
-$("#searchLocation").on("click", function () {
-    event.preventDefault();
-    var location = $("#locationInput").val().trim();
-    $("#locationInput").val("");
-
-    query(location);
-    queryForecast(location)
-
-    addButton(location);
-
-    $("#currentWeather").css("display", "block");
-    $("#forecast").css("display", "flex");
-
-});
-
-$(document).on("click", ".city-button", function () {
-    var location = $(this).attr("data-city");
-    query(location);
-    queryForecast(location);
-    $("#currentWeather").css("display", "block");
-    $("#forecast").css("display", "flex");
-});
-
-
-
-
-// Pulling Main weather info
-function query(location) {
-    var APIKey = "ef44665854f55183eee5b200931c4f01";
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=" + APIKey;
-
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(function (response) {
-        console.log(queryURL);
-        console.log(response);
-        var lat = response.coord.lat;
-        var lon = response.coord.lon;
-
-        APIKey = "ef44665854f55183eee5b200931c4f01";
-        queryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon;
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (uvIndex) {
-            renderCurrentWeather(response.name, response.main.temp, response.main.humidity, response.wind.speed, uvIndex.value, response.weather[0].main);
-        });
-
-
-    });
-
-}
-
-
-
-// pulling 5 day forcast weather info
+// Pulling 5 day forcast weather info
 function queryForecast(location) {
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=" + APIKey;
@@ -149,19 +146,20 @@ function queryForecast(location) {
         var forecast = response.list;
         for (var i = 0; i < forecast.length; i++) {
             var cardNumber = 0;
-            if (i === 0)
-                cardNumber = 0;
             if (i === 6)
-                cardNumber = 1;
+                cardNumber = 0;
             if (i === 14)
-                cardNumber = 2;
+                cardNumber = 1;
             if (i === 22)
-                cardNumber = 3;
+                cardNumber = 2;
             if (i === 30)
+                cardNumber = 3;
+            if (i === 38)
                 cardNumber = 4;
-
-            if (i === 0 || i === 6 || i === 14 || i === 22 || i === 30) {
-                fiveDates = forecast[i].dt_txt;
+            // open weather times - each number is 3 hours apart (6 hours past EDT)
+            // 6 = day1 || 14 =  2  || 22 =  3  || 30 =  4  || 38 = day 5  
+            if (i === 6 || i === 14 || i === 22 || i === 30 || i === 38) {
+                var fiveDates = forecast[i].dt_txt;
                 var temperature = forecast[i].main.temp;
                 var humidity = forecast[i].main.humidity;
                 var condition = forecast[i].weather[0].main;
@@ -173,8 +171,7 @@ function queryForecast(location) {
 }
 
 
-
-// Adding 5-day forcast items
+// Creating 5-day forcast items
 function addBoxes(index, dates, temperature, humidity, condition) {
 
     var dayBox = $("<div>");
@@ -212,9 +209,7 @@ function addBoxes(index, dates, temperature, humidity, condition) {
 
 
 
-
-
-// local storage for location search input
+// local storage for location search input buttons
 function addButton(location) {
 
     var button = $("<button>");
