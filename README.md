@@ -20,5 +20,8 @@ Below the current weather information are 5 boxes that are displaying a forcast 
 
 In the top right of each box shows icons for either rain, clouds, clear skies/sunny, drizzle, snow, mist, or fog.
 
-<img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/6.png" width="100"  /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/7.png" width="100" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/8.png" width="100" />
+<img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/6.png" width="100"  /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/7.png" width="100" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/8.png" width="110" />
 
+completely mobile friendly!
+
+<img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/9.png" width="100" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/10.png" width="100" />
