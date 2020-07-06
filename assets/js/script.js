@@ -1,55 +1,65 @@
 var locations = [];
 
+var sun = document.createElement("img");
+sun.src = "assets/images/sun.png";
+
 function getIcon(condition) {
     console.log(condition);
     if (condition === "Rain")
-        return "fas fa-cloud-showers-heavy";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Clouds")
-        return "fas fa-cloud";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Clear")
-        return "fas fa-sun";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Drizzle")
-        return "fas fa-cloud-rain";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Snow")
-        return "fas fa-snowflake";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Mist")
-        return "fas fa-smog";
+        return "<img src='assets/images/sun.png'>";
 
     if (condition === "Fog")
-        return "fas fa-smog";
+        return "<img src='assets/images/sun.png'>";
 
 }
 
-function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, condition) {
+
+
+
+function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, condition) {    
+    
     $("#location").empty();
     $("#location").append(location);
     $("#location").append(" ");
-    var date = moment().format("MM" + "/" + "DD" + "/" + "YYYY");
-    $("#location").append(date);
-    $("#location").append("  ");
+    var date = moment().format("MMMM" + " D" + "," + " YYYY");
+    
+    $("#date-main").append(date);
+    $("#date-main").append(" ");
 
     var icon = $("<span>");
-    icon.addClass(getIcon(condition));
-    $("#location").append(icon);
-
-
+    icon.append(getIcon(condition));
+    icon.addClass("weather-main");
+    $("#location").prepend(icon);
 
     $("#temperature").empty();
     $("#temperature").append(temperature);
     $("#temperature").append(" °F");
+    $("#temperature").addClass("weather-value");
 
     $("#humidity").empty();
     $("#humidity").append(humidity);
     $("#humidity").append("%");
+    $("#humidity").addClass("weather-value");
 
     $("#windSpeed").empty();
     $("#windSpeed").append(windSpeed);
     $("#windSpeed").append(" MPH");
+    $("#windSpeed").addClass("weather-value");
 
     $("#uv").empty();
     if (uv < 3)
@@ -64,6 +74,8 @@ function renderCurrentWeather(location, temperature, humidity, windSpeed, uv, co
         $("#uv").css("background-color", "purple");
 
     $("#uv").append(uv);
+    $("#uv").addClass("weather-value");
+
 }
 
 $("#searchLocation").on("click", function () {
@@ -77,7 +89,7 @@ $("#searchLocation").on("click", function () {
     addButton(location);
 
     $("#currentWeather").css("display", "block");
-    $("#forecast").css("display", "block");
+    $("#forecast").css("display", "flex");
 
 
 });
@@ -87,7 +99,7 @@ $(document).on("click", ".city-button", function () {
     query(location);
     queryForecast(location);
     $("#currentWeather").css("display", "block");
-    $("#forecast").css("display", "block");
+    $("#forecast").css("display", "flex");
 });
 
 function formatDate(date) {
@@ -98,7 +110,6 @@ function formatDate(date) {
 
 function queryForecast(location) {
 
-    //query building...
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=" + APIKey;
 
@@ -127,14 +138,13 @@ function queryForecast(location) {
                 var temperature = forecast[i].main.temp;
                 var humidity = forecast[i].main.humidity;
                 var condition = forecast[i].weather[0].main;
-                addCard(cardNumber, date, temperature, humidity, condition);
+                addBoxes(cardNumber, date, temperature, humidity, condition);
             }
         }
     });
 }
 
 function query(location) {
-    //query building
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=" + APIKey;
 
@@ -147,7 +157,6 @@ function query(location) {
         var lat = response.coord.lat;
         var lon = response.coord.lon;
 
-        //query building...
         APIKey = "ef44665854f55183eee5b200931c4f01";
         queryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIKey + "&lat=" + lat + "&lon=" + lon;
 
@@ -155,8 +164,6 @@ function query(location) {
             url: queryURL,
             method: "GET"
         }).then(function (uvresponse) {
-            // console.log(queryURL);
-            // console.log(uvresponse);
             renderCurrentWeather(response.name, response.main.temp, response.main.humidity, response.wind.speed, uvresponse.value, response.weather[0].main);
         });
 
@@ -165,55 +172,39 @@ function query(location) {
 
 }
 
-function addCard(index, date, temperature, humidity, condition) {
+function addBoxes(index, date, temperature, humidity, condition) {
 
-    // console.log("creating card #: " + index);
-
-    var card = $("<div>");
-    card.addClass("day-box");
-
-    var cardBody = $("<div>");
-    cardBody.addClass("card-bod");
-
-    var title = $("<h5>");
-    title.addClass("card-title font-weight-bold");
-    title.css("font-size", "large");
-    // console.log("date: ");
-    date = formatDate(date);
-    // var fDate = date.split(" ")[0].split("-");
-    // fDate = fDate[1] + "/" + fDate[2] + "/" + fDate[0];
-    title.text(date);
+    var dayBox = $("<div>");
 
     var icon = $("<span>");
-    icon.addClass(getIcon(condition));
+    icon.append(getIcon(condition));
+    icon.addClass("weather-icon");
+
+    var title = $("<h5>");
+    title.addClass("card-title");
+    date = formatDate(date);
+    title.text(date);
 
     var t = $("<p>");
-    t.addClass("card-text pt-3");
+    t.addClass("card-text");
     t.text("Temp: ");
     t.append(temperature);
     t.append(" °F");
 
 
     var h = $("<p>");
-    h.addClass("card-text pt-3");
+    h.addClass("card-text");
     h.text("Humidity: ");
     h.append(humidity);
     h.append("%");
 
-
-    cardBody.append(title);
-    cardBody.append(icon);
-    cardBody.append(t);
-    cardBody.append(h);
-    // console.log("comleted card body: ");
-    // console.log(cardBody);
-
-    card.append(cardBody);
-    // console.log("comleted card: ");
-    // console.log(card);
+    dayBox.append(icon);
+    dayBox.append(title);
+    dayBox.append(t);
+    dayBox.append(h);
 
     $("#" + index).empty();
-    $("#" + index).append(card);
+    $("#" + index).append(dayBox);
 }
 
 function addButton(location) {
@@ -226,17 +217,14 @@ function addButton(location) {
     $("#history").append(button);
 
     if (localStorage.getItem("locations")) {
-        //if set get it and check if we need to create new    
 
         locations = JSON.parse(localStorage.getItem("locations"));
-        var index = -1;
+        var index = 0;
         for (var i = 0; i < locations.length; i++) {
-            // id found
             if (locations[i] === location) {
                 index = i;
             }
         }
-        //if index is -1 id was not found and we need to create a new 
         if (index === -1) {
             locations.push(location);
         } else {
@@ -245,7 +233,7 @@ function addButton(location) {
     } else {
         locations.push(location);
     }
-    //update locations iten on local storage
+
     localStorage.setItem("locations", JSON.stringify(locations));
 }
 

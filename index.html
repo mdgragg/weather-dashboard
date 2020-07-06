@@ -24,7 +24,7 @@
             <form>
               <input class="search" type="search" placeholder="Search for a city" id="locationInput">
               <button class="fas fa-search" type="submit" id="searchLocation"></button>
-          </form>
+            </form>
           </div>
         </div>
 
@@ -34,50 +34,38 @@
                   <!-- buttons go here -->
               </div>
           </div>
-      </div>
+        </div>
 
-        <div class="row city-info">
-          <div class="col-12" id="currentWeather">
-            <h1 class="text-center" id="location">City </h1>
+        <div class="row city-info" id="currentWeather">
+          <div class="col-12">
+            <h1 class="text-center" id="location"> </h1>
+            <h3 id="date-main"> </h3>
 
-              <div class="row">
-                  <div class="col-3">Temperature: <span id="temperature"></span></div>
-                  <div class="col-3">Humidity: <span id="humidity"></span></div>
-                  <div class="col-3">Wind Speed: <span id="windSpeed"></span></div>
-                  <div class="col-3">UV Index: <span class="p-1 rounded text-white" id="uv"></span></div>
+              <div class="row weather-info">
+                  <div class="col-lg-3 col-md-6 col-sm-12"><span id="temperature"></span> <br> Temperature </div>
+                  <div class="col-lg-3 col-md-6 col-sm-12"><span id="humidity"></span><br> Humidity </div>
+                  <div class="col-lg-3 col-md-6 col-sm-12"> <span id="windSpeed"></span><br> Wind Speed </div>
+                  <div class="col-lg-3 col-md-6 col-sm-12 uv"><span id="uv"></span><br> UV Index</div>
               </div>
 
               <div class="row">
-                  <div class="col-12"><h2>5-Day forecast</h2></div>
+                  <div class="col-12"><h2 class="text-center">5-Day forecast</h2></div>
               </div>
       
           </div>
         </div>
 
-        <div class="row justify-content-center day-boxes">
-          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="0">
-            <h2 class="text-center">Day 1</h2>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="1">
-            <h2 class="text-center">Day 2</h2>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="2">
-            <h2 class="text-center">Day 3</h2>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="3">
-            <h2 class="text-center">Day 4</h2>
-          </div>
-          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="4">
-            <h2 class="text-center">Day 5</h2>
-          </div>
+        <div class="row justify-content-center day-boxes" id="forecast">
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="0"> </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="1"> </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="2"> </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="3"> </div>
+          <div class="col-lg-2 col-md-3 col-sm-11 day-box" id="4"> </div>
         </div>
 
-
-        </div>
+      </div>
               
-             
-      </div>
-      
+    
 
 
 
