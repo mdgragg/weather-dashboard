@@ -28,6 +28,7 @@ h3 {
 input {
     border: none;
     font-size: 28px;
+    margin-top: 15px;
     padding: 10px;
     vertical-align: bottom;
 }
@@ -70,8 +71,10 @@ input {
 
 .weather-main img{
     width: 100px;
+    height: 100px;
     padding: 10px;
     padding-top: 30px;
+    object-fit: contain;
 }
 
 .city-info h1 {
@@ -85,7 +88,7 @@ input {
     color: #0b1f51;
     font-size: 28px;
     text-align: center;
-    margin-top: -50px;
+    margin-top: -40px;
     margin-left: 30px;
 }
 
@@ -155,5 +158,3 @@ input {
     font-family: 'Open Sans', sans-serif;
     font-size: 24px;
 }
-
-

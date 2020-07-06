@@ -98,16 +98,15 @@ $(document).on("click", ".city-button", function () {
 });
 
 function formatDate(forecastDates) {
-    var forecastDates = moment().format(("MMMM" + " D" + "," + " YYYY", "MMMM" + " D" + "," + " YYYY"));
+    
     return forecastDates;
 }
 
 
 
 
-
+// 
 function queryForecast(location) {
-
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + location + "&units=imperial&appid=" + APIKey;
 
@@ -122,14 +121,19 @@ function queryForecast(location) {
             var cardNumber = 0;
             if (i === 0)
                 cardNumber = 0;
+                date = moment().format("MMMM" + " D" + "," + " YYYY");
             if (i === 6)
                 cardNumber = 1;
+                date = moment().format("MMMM" + " D" + "," + " YYYY");
             if (i === 14)
                 cardNumber = 2;
+                date = moment().format("MMMM" + " D" + "," + " YYYY");
             if (i === 22)
                 cardNumber = 3;
+                date = moment().format("MMMM" + " D" + "," + " YYYY");
             if (i === 30)
                 cardNumber = 4;
+                date = moment().format("MMMM" + " D" + "," + " YYYY");
 
             if (i === 0 || i === 6 || i === 14 || i === 22 || i === 30) {
                 var date = forecast[i].dt_txt;
@@ -142,6 +146,8 @@ function queryForecast(location) {
     });
 }
 
+
+// Main 
 function query(location) {
     var APIKey = "ef44665854f55183eee5b200931c4f01";
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=" + APIKey;
@@ -170,6 +176,8 @@ function query(location) {
 
 }
 
+
+// Adding 5-day forcast
 function addBoxes(index, date, temperature, humidity, condition) {
 
     var dayBox = $("<div>");
@@ -204,6 +212,10 @@ function addBoxes(index, date, temperature, humidity, condition) {
     $("#" + index).append(dayBox);
 }
 
+
+
+
+// local storage for location search input
 function addButton(location) {
 
     var button = $("<button>");
