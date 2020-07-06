@@ -22,6 +22,6 @@ In the top right of each box shows icons for either rain, clouds, clear skies/su
 
 <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/6.png" width="100"  /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/7.png" width="100" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/8.png" width="110" />
 
-completely mobile friendly!
+Completely mobile friendly!
 
-<img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/9.png" width="100" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/10.png" width="100" />
+<img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/9.jpg" width="170" /> <img src="https://raw.githubusercontent.com/mdgragg/weather-dashboard/master/assets/images/screenshots/10.jpg" width="170" />
