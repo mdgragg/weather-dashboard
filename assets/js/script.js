@@ -4,25 +4,25 @@ var locations = [];
 function getIcon(condition) {
     console.log(condition);
     if (condition === "Rain")
-        return "<img src='assets/images/rain.png'>";
+        return "<img src='assets/images/icons/rain.png'>";
 
     if (condition === "Clouds")
-        return "<img src='assets/images/clouds.png'>";
+        return "<img src='assets/images/icons/clouds.png'>";
 
     if (condition === "Clear")
-        return "<img src='assets/images/sun.png'>";
+        return "<img src='assets/images/icons/sun.png'>";
 
     if (condition === "Drizzle")
-        return "<img src='assets/images/drizzle.png'>";
+        return "<img src='assets/images/icons/drizzle.png'>";
 
     if (condition === "Snow")
-        return "<img src='assets/images/snow.png'>";
+        return "<img src='assets/images/icons/snow.png'>";
 
     if (condition === "Mist")
-        return "<img src='assets/images/mist.png'>";
+        return "<img src='assets/images/icons/mist.png'>";
 
     if (condition === "Fog")
-        return "<img src='assets/images/fog.png'>";
+        return "<img src='assets/images/icons/fog.png'>";
 
 }
 
