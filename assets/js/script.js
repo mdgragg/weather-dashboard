@@ -104,17 +104,6 @@ $(document).on("click", ".city-button", function () {
 
 
 
-
-
-
-function formatDate(forecastDates) {
-    var forecastDates = moment().format("MMMM" + " D" + "," + " YYYY");
-    return forecastDates;
-}
-
-
-
-
 // Pulling Main weather info
 function query(location) {
     var APIKey = "ef44665854f55183eee5b200931c4f01";
@@ -172,12 +161,12 @@ function queryForecast(location) {
                 cardNumber = 4;
 
             if (i === 0 || i === 6 || i === 14 || i === 22 || i === 30) {
-                forecastDates = ("MMMM" + " D" + "," + " YYYY");
+                fiveDates = forecast[i].dt_txt;
                 var temperature = forecast[i].main.temp;
                 var humidity = forecast[i].main.humidity;
                 var condition = forecast[i].weather[0].main;
                 
-                addBoxes(cardNumber, forecastDates, temperature, humidity, condition);
+                addBoxes(cardNumber, fiveDates, temperature, humidity, condition);
             }
         }
     });
@@ -186,7 +175,7 @@ function queryForecast(location) {
 
 
 // Adding 5-day forcast items
-function addBoxes(index, date, temperature, humidity, condition) {
+function addBoxes(index, dates, temperature, humidity, condition) {
 
     var dayBox = $("<div>");
 
@@ -196,9 +185,9 @@ function addBoxes(index, date, temperature, humidity, condition) {
 
     var title = $("<h5>");
     title.addClass("card-title");
-    date = formatDate(date);
-    title.text(date);
-
+    var dates = moment(dates).format("MMMM" + " D" + "," + " YYYY");
+    title.append(dates);
+    
     var boxTemperature = $("<p>");
     boxTemperature.addClass("card-text");
     boxTemperature.text("Temperature");
